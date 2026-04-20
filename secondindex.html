@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeePass — подписка на кофе</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #f8f5f0;
+            --color-bg-alt: #f1e9e1;
+            --color-text: #2d2d2d;
+            --color-text-muted: #6b6b6b;
+            --color-accent: #8B4513;
+            --color-accent-hover: #A0522D;
+            --color-card-bg: #fff;
+            --color-border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        .font-display { font-family: 'Inter', sans-serif; }
+
+        .hero-svg {
+            width: 400px;
+            height: auto;
+        }
+
+        .card {
+            background-color: var(--color-card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+        }
+
+        .pricing-card {
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .pricing-card.active {
+            border-color: var(--color-accent-hover);
+            box-shadow: 0 6px 20px rgba(139,69,19,0.15);
+        }
+
+        .btn-accent {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--color-accent-hover);
+        }
+
+        .btn-outline-accent {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-outline-accent:hover {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .faq-item + .faq-item { border-top: 1px solid var(--color-border); }
+    </style>
+</head>
+<body class="font-display">
+
+    <!-- Верхняя панель -->
+    <header class="bg-white shadow-sm py-3 fixed w-full z-10">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-[var(--color-accent)]">CoffeePass</a>
+            <nav>
+                <ul class="flex space-x-6 hidden md:flex items-center">
+                    <li><a href="#how" class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition">Как работает</a></li>
+                    <li><a href="#pricing" class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition">Тарифы</a></li>
+                    <li><a href="#reviews" class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition">Отзывы</a></li>
+                    <li><a href="#faq" class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition">FAQ</a></li>
+                </ul>
+                <a href="#apply" class="btn btn-accent px-5 py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition hidden md:block">Оформить</a>
+                <a href="#apply" class="btn btn-outline-accent px-4 py-2.5 rounded-full text-sm font-medium md:hidden">Оформить</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero-блок -->
+    <section class="relative bg-[var(--color-bg-alt)] py-24 md:py-32">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl md:text-5xl font-bold text-[var(--color-text)] mb-4">Вкусный кофе каждый день — без забот</h1>
+                <p class="text-lg text-[var(--color-text-muted)] mb-8 max-w-xl">
+                    Оформите подписку CoffeePass и забирайте свежий напиток в любой точке города. Удобно, выгодно и всегда под рукой.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#apply" class="btn btn-accent px-6 py-3 rounded-full text-lg font-medium hover:opacity-90 transition">Оформить подписку</a>
+                    <a href="#pricing" class="btn btn-outline-accent px-6 py-3 rounded-full text-lg font-medium hover:opacity-90 transition">Посмотреть тарифы</a>
+                </div>
+            </div>
+
+            <!-- SVG-картинка (кофейная чашка) -->
+            <div class="md:w-1/2 flex justify-end">
+                <svg class="hero-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="cup-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="shadow-cup" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#000" floodOpacity="0.1"/>
+                        </filter>
+                    </defs>
+                    <g transform="translate(20,20)">
+                        <ellipse cx="180" cy="330" rx="75" ry="35" fill="#F4A460" filter="url(#shadow-cup)" />
+                        <path d="M180,330 Q220,370 260,330 T340,330 T420,330 Q460,370 500,330 L500,395 L180,395 Z"
+                              fill="url(#cup-gradient)" stroke="#8B4513" stroke-width="2"/>
+                        <ellipse cx="315" cy="352.5" rx="7.5" ry="7.5" fill="#FFF"/>
+                        <ellipse cx="85" cy="352.5" rx="7.5" ry="7.5" fill="#FFF"/>
+                        <path d="M265,367 Q285,387 315,367 T365,367 Q385,387 405,367"
+                              fill="#FFF8DC" stroke="#D2B48C" stroke-width="1"/>
+                        <circle cx="265" cy="287.5" r="47.5" fill="#FFF"/>
+                        <circle cx="265" cy="287.5" r="42.5" fill="#FFF"/>
+                        <circle cx="265" cy="287.5" r="37.5" fill="#FFF"/>
+                        <circle cx="265" cy="287.5" r="32.5" fill="#FFF"/>
+                        <circle cx="265" cy="287.5" r="27.5" fill="#FFF"/>
+                        <circle cx="265" cy="287.5" r="22.5" fill="#FFF"/>
+                        <circle cx= "265" cy= "287.5" r= "17.5" fill= "#FFF"/>
+                        <circle cx= "265" cy= "287.5" r= "12.5" fill= "#FFF"/>
+                        <circle cx= "265" cy= "287.5" r= "7.5" fill= "#FFF"/>
+                        <circle cx= "265" cy= "287.5" r= "2.5" fill= "#FFF"/>
+                        <path d="
+                            M267,297 
+                            A47,47 0 1,1 267,391 
+                            A47,47 0 1,1 267,297 
+                            Z"
+                              fill="#DAA520"/>
+                         <path d="
+                            M267,317 
+                            A47,47 0 1,1 267,411 
+                            A47,47 0 1,1 267,317 
+                            Z"
+                              fill="#FFDAB9"/>
+                         <path d="
+                            M267,337 
+                            A47,47 0 1,1 267,431 
+                            A47,47 0 1,1 267,337 
+                            Z"
+                              fill="#FFEFD5"/>
+                         <circle cx= "265" cy= "399.5" r= "9.5" fill= "#FFAE19"/>
+                         <circle cx= "265" cy= "419.5" r= "9.5" fill= "#FFDAB9"/>
+                         <circle cx= "265" cy= "439.5" r= "9.5" fill= "#FFEFD5"/>
+                         <circle cx= "265" cy= "459.5" r= "9.5" fill= "#FFF8DC"/>
+                    </g>
+                </svg>
+             </div>
+         </div>
+     </section>
+
+     <!-- Блок "Как работает" -->
+     <section id='how' class='py-16 md:py-24 bg-white'>
+         <div class='container mx-auto px-4 text-center'>
+             <h2 class='text-3xl md:text-4xl font-bold mb-12 text-[var(--color-text)]'>Как работает CoffeePass</h2>
+             <div class='grid grid-cols-1 md:grid-cols-3 gap-8'>
+                 <!-- Карточка 1 -->
+                 <div class='card p-6'>
+                     <h3 class='text-xl font-semibold mb-4 text-[var(--color-text)]'>Выберите тариф</h3>
+                     <p class='text-[var(--color-text-muted)]'>Подберите подходящий план подписки — от классического эспрессо до авторских напитков.</p>
+                 </div>
+                 <!-- Карточка 2 -->
+                 <div class='card p-6'>
+                     <h3 class='text-xl font-semibold mb-4 text-[var(--color-text)]'>Забирайте кофе</h3>
+                     <p class='text-[var(--color-text-muted)]'>Приходите в любую точку выдачи с приложением или QR-кодом.</p>
+                 </div>
+                 <!-- Карточка 3 -->
+                 <div class='card p-6'>
+                     <h3 class='text-xl font-semibold mb-4 text-[var(--color-text)]'>Наслаждайтесь!</h3>
+                     <p class='text-[var(--color-text-muted)]'>Каждый день — свежий кофе без очередей и лишних забот.</p>
+                 </div>
+             </div>
+         </div>
+     </section>
+
+     <!-- Блок "Тарифы" -->
+     <section id='pricing' class='py-16 md:py-24 bg-[var(--color-bg)]'>
+         <div class='container mx-auto px-4 text-center'>
+             <h2 class='text-3xl md:text-4xl font-bold mb-16 text-[var(--color-text)]'>Выберите свой тариф</h2>
+             <div class='grid grid-cols-1 lg:grid-cols-3 gap-8'>
+                 <!-- Тариф Start -->
+                 <div id='start-card' class='pricing-card card p-8 cursor-pointer transition-all duration-300 hover:shadow-lg active'>
+                     <h3 class='text-xl font-semibold mb-4 text-[var(--color-text)]'>Start</h3>
+                     <p class='text-4xl font-bold mb-6 text-[var(--color-accent)]'>₽/день</p>
+                     <ul class='space-y-3 text-[var(--color-text-muted)] mb-8'>
+                         <li>Классический эспрессо или американо</li>
+                         <li>Доступ к основным точкам выдачи</li>
+                         <li>Безлимитная замена напитка в день</li>
+                     </ul>
+                     <a href='#apply' class='btn btn-outline-accent px-6 py-3 rounded-full text-lg font-medium'>Выбрать</a>
+                 </div>
+                 <!-- Тариф Plus -->
+                 <div id='plus-card' class='pricing-card card p-8 cursor-not-allowed opacity-70'>
+                     <h3 class='text-xl font-semibold mb-4 text-[var(--color-text)]'>Plus</h3>
+                     <p class='text-4xl font-bold mb-6 text-[var(--color-accent)]'>₽/день</p>
+                     <ul class='space-y-3 text-[var(--color-text-muted)] mb-8'>
+                         <li>Все напитки из меню Start + капучино/латте</li>
+                         <li>Приоритетная выдача в часы пик</li>
+                         <li>Скидка 10% на десерты и выпечку</li>
+                     </ul>
+                     <button disabled class='btn btn-outline-gray px-6 py-3 rounded-full text-lg font-medium cursor-not-allowed opacity-70'>Скоро</button>
+                 </div>
+                 <!-- Тариф Pro -->
+                 <div id='pro-card' class='pricing-card card p-8 cursor-not-allowed opacity-70'>
+                     <h3 class='text-xl font-semibold mb-4 text-[var(--color-text)]'>Pro</h3>
+                     <p class='text-4xl font-bold mb-6 text-[var(--color-accent)]'>₽/день</p>
+                     <ul class='space-y-3 text-[var(--color-text-muted)] mb-8'>
+                         <li>Полный доступ ко всему меню + сезонные новинки</li>
+                         <li>Персональный менеджер и поддержка 24/7</li>
+                         <li>Подарочные сертификаты для друзей</li>
+                     </ul>
+                     <button disabled class='btn btn-outline-gray px-6 py-3 rounded-full text-lg font-medium cursor-not-notallowed opacity-70'>Скоро</button>
+                 </div>
+             </div>
+         </div>
+     </section>
+
+     <!-- Блок оформления заявки -->
+     <section id ='apply' class='py-16 md:py-24 bg-white'>
+         <div class='container mx-auto px-4 max-w-xl mx-auto'>
+             <h2 class='text-center text-3xl md:text-4xl font-bold mb-8 text-[var(--color-text)]'>Оформите подписку за 1 минуту</h2>
+             <form id='application-form' onsubmit='return false;'>
+                 <!-- Имя -->
+                 <label for='name' class ='block mb-2 text-sm font-medium text-[var(--color-text)]'>Ваше имя *</label>
+                 <input type='text' id ='name' name='name' required placeholder='Иван Иванов'
+                       class='w-full p-3 border border-gray rounded-md focus:outline-none focus:ring focus:border-[var(--color-accent)] mb-6'/>
+
+                 <!-- Телефон -->
+                 <label for='phone' class='block mb-2 text-sm font-medium text-[var(--color-text)]'>Телефон *</label>
+                 <input type='tel' id='phone' name='phone' required placeholder='+7 (___) ___ __ __'
+                       pattern='\+?[0 -9]{ $?$?\d{ 3}$?[\s.-]?\d{ 3}[\s.-]?\d{ 2}[\s.-]?\d{ 2}'
+                       title='+7 (XXX) XXX XX XX'
+                       oninput = 'this.value = this.value.replace(/[^\d+() -]/g,"")'
+                       maxlength = '18'
+                       minlength = '18'
+                       autocomplete = 'tel'
+                       placeholder ='+7

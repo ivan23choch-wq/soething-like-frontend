@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Алексей Иванов | Начинающий фронтенд-разработчик</title>
+    <!-- Подключаем шрифт Google Fonts для современного вида -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header / навигация */
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            background: rgba(255,255,255,0.92);
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #334155;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        .btn-outline-light {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-outline-light:hover {
+            border-color: #2563eb;
+            background: #f0f9ff;
+        }
+
+        /* общие секции */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+        .section-sub {
+            text-align: center;
+            color: #475569;
+            max-width: 680px;
+            margin: 0 auto 48px auto;
+            font-size: 1.1rem;
+        }
+
+        /* hero блок */
+        .hero {
+            padding: 60px 0 40px 0;
+            background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .hero-badge {
+            background: #e0e7ff;
+            color: #1e40af;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+        .hero-highlight {
+            background: linear-gradient(120deg, #d9f0ff, #c7e2ff);
+            padding: 0 6px;
+            border-radius: 12px;
+        }
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #334155;
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 28px;
+            margin-bottom: 32px;
+        }
+        .stat-item span {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #0f172a;
+        }
+        .hero-image {
+            flex: 0.8;
+            text-align: center;
+            background: #eef2ff;
+            border-radius: 32px;
+            padding: 20px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+        .hero-image i {
+            font-size: 8rem;
+            color: #2563eb;
+        }
+
+        /* услуги карточки */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 24px;
+            transition: transform 0.25s ease, box-shadow 0.25s;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eef2ff;
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15);
+            border-color: #cbdffc;
+        }
+        .service-icon {
+            font-size: 2.8rem;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .service-desc {
+            color: #475569;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .price {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: #0f172a;
+            margin: 16px 0 8px;
+        }
+        .price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #5b6e8c;
+        }
+        .price-note {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        .btn-service {
+            margin-top: 16px;
+            background: none;
+            border: 1px solid #cbd5e1;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            color: #1f2937;
+        }
+        .btn-service:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        /* почему я / преимущества */
+        .why-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .why-item {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 20px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .why-item i {
+            font-size: 2.2rem;
+            color: #3b82f6;
+            margin-bottom: 16px;
+        }
+
+        /* прайс-пакет общий (дополнительно) */
+        .pricing-note {
+            background: #eef2ff;
+            border-radius: 24px;
+            padding: 32px;
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        /* контакт / форма */
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            background: white;
+            border-radius: 36px;
+            padding: 40px;
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.05);
+        }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .contact-detail i {
+            font-size: 1.8rem;
+            color: #2563eb;
+            width: 40px;
+        }
+        .contact-form {
+            flex: 1;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 28px;
+            border: 1px solid #cbd5e1;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+        .btn-primary {
+            background: #2563eb;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: scale(0.98);
+        }
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 36px 0;
+            text-align: center;
+        }
+        .social-links a {
+            color: #94a3b8;
+            margin: 0 12px;
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .nav-flex {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .contact-flex {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-flex">
+                <div class="logo">Alex Frontend</div>
+                <ul class="nav-links">
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#pricing">Стоимость</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <a href="#contact" class="btn-outline-light">Связаться</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">✨ Начинающий, но амбициозный</div>
+                    <h1>Создаю современные <span class="hero-highlight">сайты</span>, которые работают</h1>
+                    <p class="hero-desc">Помогаю бизнесам и стартапам выглядеть стильно в интернете. Адаптивная вёрстка, интерактив и внимание к деталям.</p>
+                    <div class="hero-stats">
+                        <div class="stat-item"><span>6+</span><br>проектов</div>
+                        <div class="stat-item"><span>100%</span><br>отзывов</div>
+                        <div class="stat-item"><span>24/7</span><br>на связи</div>
+                    </div>
+                    <a href="#services" class="btn-primary" style="display: inline-block; text-decoration: none;">Посмотреть услуги →</a>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-laptop-code"></i>
+                    <p style="margin-top: 12px; font-weight: 500;">Верстка / React / Адаптив</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- УСЛУГИ + СТОИМОСТЬ объединены в один блок с карточками, где указаны цены -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Мои услуги и стоимость</h2>
+            <p class="section-sub">Честные цены для начинающего разработчика. Каждый проект — как собственный.</p>
+            <div class="services-grid">
+                <!-- Карточка 1 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Landing Page</h3>
+                    <p class="service-desc">Одностраничный сайт для презентации продукта, услуги или события. Адаптив, анимации, форма связи.</p>
+                    <div class="price">от 8 900 ₽ <small>/ проект</small></div>
+                    <div class="price-note">Срок: 3-5 дней</div>
+                    <a href="#contact" class="btn-service">Заказать</a>
+                </div>
+                <!-- Карточка 2 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                    <h3>Многостраничный сайт</h3>
+                    <p class="service-desc">Сайт на 3-5 страниц (Главная, Услуги, Блог, Контакты). Идеально для малого бизнеса.</p>
+                    <div class="price">от 22 900 ₽ <small>/ проект</small></div>
+                    <div class="price-note">Срок: 7-10 дней</div>
+                    <a href="#contact" class="btn-service">Заказать</a>
+                </div>
+                <!-- Карточка 3 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fab fa-react"></i></div>
+                    <h3>React-приложение</h3>
+                    <p class="service-desc">Интерактивный SPA на React, компоненты, роутинг, работа с API и хуки.</p>
+                    <div class="price">от 32 000 ₽ <small>/ проект</small></div>
+                    <div class="price-note">Срок: от 14 дней</div>
+                    <a href="#contact" class="btn-service">Заказать</a>
+                </div>
+                <!-- Карточка 4: Дополнительная услуга / поддержка -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Адаптив + редизайн</h3>
+                    <p class="service-desc">Доработка существующего сайта: мобильная версия, улучшение UI, правки вёрстки.</p>
+                    <div class="price">от 5 500 ₽ <small>/ страница</small></div>
+                    <div class="price-note">Быстро и качественно</div>
+                    <a href="#contact" class="btn-service">Обсудить</a>
+                </div>
+            </div>
+            <!-- Дополнительный блок с пояснением -->
+            <div class="pricing-note">
+                <i class="fas fa-gem" style="font-size: 2rem; color: #2563eb;"></i>
+                <h3 style="margin: 12px 0;">Гибкая система оплаты</h3>
+                <p>Предоплата 30%, остальное после сдачи проекта. Возможна помесячная поддержка от 3000₽/мес. Работаю по договору и с ТЗ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок преимущества / почему я -->
+    <section style="background: #ffffff;" id="why-me">
+        <div class="container">
+            <h2 class="section-title">Почему стоит выбрать меня?</h2>
+            <p class="section-sub">Молодой специалист, который ценит ваше время и идеи</p>
+            <div class="why-grid">
+                <div class="why-item"><i class="fas fa-mobile-alt"></i><h3>Адаптивная вёрстка</h3><p>Корректно на любых устройствах — от телефонов до 4K.</p></div>
+                <div class="why-item"><i class="fas fa-rocket"></i><h3>Скорость работы</h3><p>Соблюдаю дедлайны и всегда на связи в рабочих чатах.</p></div>
+                <div class="why-item"><i class="fas fa-heart"></i><h3>Чистый код</h3><p>HTML/CSS/JS с комментариями, легко дорабатывать.</p></div>
+                <div class="why-item"><i class="fas fa-chart-line"></i><h3>SEO-основы</h3><p>Микроразметка, семантическая вёрстка для продвижения.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио в виде мини-галереи (символическое) -->
+    <section style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Недавние работы</h2>
+            <p class="section-sub">Несколько проектов, реализованных для реальных клиентов</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;">
+                <div style="background: white; border-radius: 24px; padding: 16px; width: 260px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.05);">
+                    <i class="fas fa-store" style="font-size: 48px; color: #2c3e66;"></i>
+                    <h4 style="margin: 12px 0;">Магазин растений</h4>
+                    <p style="color: #475569;">Landing + каталог товаров</p>
+                    <span style="font-weight: bold;">отзыв: 👍 отлично</span>
+                </div>
+                <div style="background: white; border-radius: 24px; padding: 16px; width: 260px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.05);">
+                    <i class="fas fa-chalkboard-user" style="font-size: 48px; color: #2c3e66;"></i>
+                    <h4 style="margin: 12px 0;">Образовательный портал</h4>
+                    <p style="color: #475569;">React + адаптивные уроки</p>
+                    <span style="font-weight: bold;">🔥 5/5</span>
+                </div>
+                <div style="background: white; border-radius: 24px; padding: 16px; width: 260px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.05);">
+                    <i class="fas fa-blog" style="font-size: 48px; color: #2c3e66;"></i>
+                    <h4 style="margin: 12px 0;">Блог путешествий</h4>
+                    <p style="color: #475569;">Вёрстка, темы, комментарии</p>
+                    <span style="font-weight: bold;">⭐ 4.9</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контактная форма и информация -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Давайте обсудим ваш проект</h2>
+            <p class="section-sub">Напишите мне, и я свяжусь с вами в течение нескольких часов</p>
+            <div class="contact-flex">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <p>Я всегда открыт к новым задачам и интересным идеям. Работаю удаленно, по всей России и СНГ.</p>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div>hello@alexfrontend.ru<br><span style="font-size: 0.85rem;">предпочитаемый способ связи</span></div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fab fa-telegram"></i>
+                        <div>@alex_front_web<br><span style="font-size: 0.85rem;">быстрые ответы</span></div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>+7 (999) 123-45-67<br><span style="font-size: 0.85rem;">по будням 10:00–19:00</span></div>
+                    </div>
+                    <div class="social-links" style="margin-top: 28px;">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="post" id="demoForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ваше имя *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email или Telegram *" required>
+                        </div>
+                        <div class="form-group">
+                            <select style="width: 100%; padding: 14px 18px; border-radius: 28px; border: 1px solid #cbd5e1; font-family: inherit;">
+                                <option>Выберите услугу</option>
+                                <option>Landing Page (от 8900₽)</option>
+                                <option>Многостраничный сайт (от 22900₽)</option>
+                                <option>React-приложение (от 32000₽)</option>
+                                <option>Адаптив/редизайн</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="4" placeholder="Краткое описание проекта или вопрос..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Отправить заявку <i class="fas fa-paper-plane"></i></button>
+                        <p style="font-size: 0.75rem; margin-top: 14px;">Нажимая на кнопку, вы соглашаетесь с политикой обработки данных.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div style="margin-bottom: 20px;">
+                <span style="font-weight: 600; font-size: 1.4rem;">Alex Frontend</span>
+            </div>
+            <p>© 2025 Начинающий фронтенд-разработчик. Все права защищены.</p>
+            <p style="margin-top: 12px;">HTML + CSS — современный отзывчивый дизайн. Все услуги и цены указаны как пример.</p>
+            <div class="social-links" style="margin-top: 20px;">
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- небольшой скрипт для имитации отправки формы (демо) без перезагрузки, информативно -->
+    <script>
+        const form = document.getElementById('demoForm');
+        if(form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Спасибо! Ваша заявка принята. Я свяжусь с вами в ближайшее время (демо-режим).');
+                form.reset();
+            });
+        }
+        // плавный скролл для навигации
+        document.querySelectorAll('.nav-links a, .btn-outline-light, .btn-service, a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const hash = this.getAttribute('href');
+                if(hash && hash !== '#' && hash.startsWith('#') && hash.length > 1) {
+                    const target = document.querySelector(hash);
+                    if(target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
